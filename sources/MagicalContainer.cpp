@@ -7,8 +7,6 @@ using namespace ariel;
 //----------------------------- MagicalContainer class -----------------------------//
 MagicalContainer::MagicalContainer() {}
 
-MagicalContainer::~MagicalContainer() {}
-
 void MagicalContainer::addElement(int element) {}
 
 void MagicalContainer::removeElement(int element) {}
@@ -72,7 +70,7 @@ MagicalContainer::AscendingIterator MagicalContainer::AscendingIterator::begin()
 }
 
 MagicalContainer::AscendingIterator MagicalContainer::AscendingIterator::end() const{
-    return AscendingIterator(container, container.size());
+    return AscendingIterator(container, 0);
 }
 
 
@@ -81,7 +79,7 @@ MagicalContainer::AscendingIterator MagicalContainer::AscendingIterator::end() c
 //----------------------------- SideCrossIterator class -----------------------------//
 
 MagicalContainer::SideCrossIterator::SideCrossIterator(const MagicalContainer& container_, int index_, bool fromStart_)
-    : container(container_), index(index_), fromStart(fromStart_) {}
+    : container(container_), index(0), fromStart(false) {}
 
 MagicalContainer::SideCrossIterator::SideCrossIterator(const SideCrossIterator& other)
     : container(other.container), index(other.index), fromStart(other.fromStart) {}
@@ -126,7 +124,7 @@ MagicalContainer::SideCrossIterator MagicalContainer::SideCrossIterator::begin()
 }
 
 MagicalContainer::SideCrossIterator MagicalContainer::SideCrossIterator::end() const{
-    return SideCrossIterator(container, container.size(), false);
+    return SideCrossIterator(container, 0, false);
 }
 
 
@@ -189,5 +187,5 @@ MagicalContainer::PrimeIterator MagicalContainer::PrimeIterator::begin() const{
 }
 
 MagicalContainer::PrimeIterator MagicalContainer::PrimeIterator::end() const{
-    return PrimeIterator(container, container.size());
+    return PrimeIterator(container, 0);
 }

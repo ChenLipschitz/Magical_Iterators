@@ -2,19 +2,17 @@
 
 #include <vector>
 #include <iterator>
-
-
+using namespace std;
 namespace ariel{
     class MagicalContainer {
     private:
-        std::vector<int> elements;
+        vector<int> elements;
 
     public:
         MagicalContainer();
-        ~MagicalContainer();
         void addElement(int element);
         void removeElement(int element);
-        std::vector<int> getElements() const;
+        vector<int> getElements() const;
         int size() const;
 
 
