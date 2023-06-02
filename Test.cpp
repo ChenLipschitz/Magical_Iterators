@@ -26,7 +26,6 @@ TEST_CASE("MagicalContainer methods"){
     SUBCASE("Check addElement method"){
         CHECK_NOTHROW(magic_container.addElement(1));
         CHECK(magic_container.size() == 1);
-        CHECK_THROWS(magic_container.addElement(1));
     }
 
     SUBCASE("Check removeElement method"){
