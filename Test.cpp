@@ -7,7 +7,7 @@ using namespace ariel;
 
 TEST_CASE("MagicalContainer methods"){
     MagicalContainer magic_container;
-    SUBCASE("check size method"){
+    SUBCASE("Check size method"){
         CHECK(magic_container.size() == 0);
         magic_container.addElement(32);
         magic_container.addElement(43);
@@ -23,13 +23,13 @@ TEST_CASE("MagicalContainer methods"){
         magic_container.removeElement(44);        
     }
 
-    SUBCASE("check addElement method"){
+    SUBCASE("Check addElement method"){
         CHECK_NOTHROW(magic_container.addElement(1));
         CHECK(magic_container.size() == 1);
         CHECK_THROWS(magic_container.addElement(1));
     }
 
-    SUBCASE("check removeElement method"){
+    SUBCASE("Check removeElement method"){
         CHECK_THROWS(magic_container.removeElement(1));
         magic_container.addElement(1);
         CHECK_NOTHROW(magic_container.removeElement(1));
@@ -43,7 +43,7 @@ TEST_CASE("MagicalContainer methods"){
         CHECK( magic_container.size() == 0);
     }
 
-    SUBCASE("check getElements method"){
+    SUBCASE("Check getElements method"){
         CHECK(magic_container.getElements().size() == 0);
         CHECK_NOTHROW(magic_container.getElements());
     }
@@ -90,8 +90,6 @@ TEST_CASE("AscendingIterator methods"){
     SUBCASE("Check iterator dereference operator") {
         MagicalContainer::AscendingIterator asItr(magic_container);
         auto itr = asItr.begin();
-
-        // Test the dereference operator
         CHECK(*itr == 1);
     }
 
@@ -99,7 +97,6 @@ TEST_CASE("AscendingIterator methods"){
         MagicalContainer::AscendingIterator asItr(magic_container);
         auto itr = asItr.begin();
 
-        // Test the increment operator
         ++itr;
         CHECK(*itr == 2);
 
