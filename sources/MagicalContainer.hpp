@@ -80,7 +80,6 @@ namespace ariel{
             PrimeIterator(const MagicalContainer& container, int index);
             PrimeIterator(const PrimeIterator& other);
             PrimeIterator(const MagicalContainer& other);
-            
             ~PrimeIterator();
 
             // overloading operator
