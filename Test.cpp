@@ -161,6 +161,58 @@ TEST_CASE("SideCrossIterator Test") {
 }
 
 
+TEST_CASE("PrimeIterator tests") {
+    MagicalContainer magic_container;
+    magic_container.addElement(1);
+    magic_container.addElement(2);
+    magic_container.addElement(3);
+    magic_container.addElement(4);
+    magic_container.addElement(5);
+
+    MagicalContainer::PrimeIterator prime_iterator(magic_container);
+    auto itr = prime_iterator.begin();
+
+    SUBCASE("Check iterator dereference operator") {
+        CHECK_EQ(*itr, 2);
+        ++itr;
+        CHECK_EQ(*itr, 3);
+    }
+
+    SUBCASE("Check iterator increment operator") {
+        ++itr;
+        CHECK_EQ(*itr, 3);
+        ++itr;
+        CHECK_EQ(*itr, 5);
+    }
+
+    SUBCASE("Check iterator comparison operators") {
+        auto itr2 = prime_iterator.begin();
+        CHECK_EQ(itr == itr2, true);
+        ++itr;
+        CHECK_EQ(itr == itr2, false);
+
+        CHECK_EQ(itr != itr2, false);
+        ++itr;
+        CHECK_EQ(itr != itr2, true);
+
+        CHECK_EQ(itr > itr2, false);
+        ++itr;
+        CHECK_EQ(itr > itr2, true);
+
+        CHECK_EQ(itr < itr2, false);
+        ++itr2;
+        CHECK_EQ(itr < itr2, true);
+    }
+
+    SUBCASE("Check iterator begin and end methods") {
+        CHECK_EQ(*itr, 2);
+
+        auto itr2 = prime_iterator.end();
+        CHECK(itr == prime_iterator.end());
+    }
+}
+
+
 
 
 
