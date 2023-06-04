@@ -57,12 +57,12 @@ TEST_CASE("AscendingIterator methods"){
     magic_container.addElement(5);
     magic_container.addElement(2);
 
-
+    MagicalContainer::AscendingIterator asItr(magic_container);
+    auto itr = asItr.begin();
+    
     SUBCASE("Check iteration in ascending order") {
         vector<int> expected_elements{1, 2, 3, 4, 5};
         vector<int> actual_elements;
-
-        MagicalContainer::AscendingIterator asItr(magic_container);
 
         // Iterate over the elements and store them in the actual_elements vector
         while (asItr != asItr.end()) {
@@ -74,8 +74,6 @@ TEST_CASE("AscendingIterator methods"){
     }
 
     SUBCASE("Check iterator comparison operators") {
-        MagicalContainer::AscendingIterator asItr(magic_container);
-        auto itr = asItr.begin();
         auto end = asItr.end();
 
         CHECK(itr == itr);
@@ -87,15 +85,10 @@ TEST_CASE("AscendingIterator methods"){
     }
 
     SUBCASE("Check iterator dereference operator") {
-        MagicalContainer::AscendingIterator asItr(magic_container);
-        auto itr = asItr.begin();
         CHECK(*itr == 1);
     }
 
     SUBCASE("Check iterator increment operator") {
-        MagicalContainer::AscendingIterator asItr(magic_container);
-        auto itr = asItr.begin();
-
         ++itr;
         CHECK(*itr == 2);
 
@@ -104,7 +97,68 @@ TEST_CASE("AscendingIterator methods"){
     }
 }
 
+TEST_CASE("SideCrossIterator Test") {
+    MagicalContainer magic_container;
+    magic_container.addElement(4);
+    magic_container.addElement(8);
+    magic_container.addElement(12);
 
+    MagicalContainer::SideCrossIterator s_cross_iterator(magic_container);
+    auto begin_iterator = s_cross_iterator.begin();
+
+    SUBCASE("begin() and end()") {
+        auto end_iterator = s_cross_iterator.end();
+        CHECK(*begin_iterator == 4);
+        CHECK(begin_iterator != end_iterator);
+        ++begin_iterator;
+        CHECK(*begin_iterator == 12);
+        ++begin_iterator;
+        CHECK(begin_iterator == end_iterator);
+    }
+
+    SUBCASE("Check iterator increment operator") {
+        ++begin_iterator;
+        CHECK(*begin_iterator == 12);
+        ++begin_iterator;
+        CHECK(begin_iterator == s_cross_iterator.end());
+
+        // Test incrementing beyond the end of the iterator
+        CHECK_THROWS(++begin_iterator);
+    }
+
+    SUBCASE("Check iterator comparison operators") {
+        auto begin_iterator2 = s_cross_iterator.begin();
+        // Test equality and inequality operators
+        CHECK(begin_iterator == begin_iterator2);
+        CHECK_FALSE(begin_iterator != begin_iterator2);
+
+        // Increment iterator2 and test inequality
+        ++begin_iterator2;
+        CHECK(begin_iterator != begin_iterator2);
+        CHECK_FALSE(begin_iterator == begin_iterator2);
+
+        // Reset iterator2
+        begin_iterator2 = s_cross_iterator.begin();
+
+        CHECK_FALSE(begin_iterator > begin_iterator2);
+        CHECK_FALSE(begin_iterator2 > begin_iterator);
+        CHECK_FALSE(begin_iterator < begin_iterator2);
+        CHECK_FALSE(begin_iterator2 < begin_iterator);
+
+        // Increment iterator2 and test comparison
+        ++begin_iterator2;
+        CHECK(begin_iterator2 > begin_iterator);
+        CHECK_FALSE(begin_iterator > begin_iterator2);
+        CHECK(begin_iterator < begin_iterator2);
+        CHECK_FALSE(begin_iterator2 < begin_iterator);
+    }
+
+    SUBCASE("Check iterator dereference operator") {
+        CHECK(*begin_iterator == 4);
+        ++begin_iterator;
+        CHECK(*begin_iterator == 12);
+    }
+}
 
 
 
